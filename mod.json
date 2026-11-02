@@ -1,0 +1,78 @@
+{
+	"geode": "5.11.2",
+	"gd": {
+		"win": "2.2081"
+	},
+	"id": "perrilioncub.fake-react-chat",
+	"name": "Fake React Chat",
+	"version": "v0.1.0",
+	"developer": "perrilioncub",
+	"description": "An AI-powered fake stream chat that reacts to your gameplay.",
+	"settings": {
+		"enabled": {
+			"type": "bool",
+			"name": "Enabled",
+			"description": "Show the chat while playing levels.",
+			"default": true
+		},
+		"api-key": {
+			"type": "string",
+			"name": "Claude API Key",
+			"description": "Your Anthropic API key (starts with <cy>sk-ant-</c>). Get one at console.anthropic.com. It is only sent to api.anthropic.com.",
+			"default": ""
+		},
+		"model": {
+			"type": "string",
+			"name": "Model",
+			"description": "Claude model ID. Haiku is fast and cheap.",
+			"default": "claude-haiku-5-5"
+		},
+		"chatters": {
+			"type": "int",
+			"name": "Chatters",
+			"description": "How many different people are in chat.",
+			"default": 12,
+			"min": 3,
+			"max": 40,
+			"control": { "slider-step": 1 }
+		},
+		"activity": {
+			"type": "string",
+			"name": "Chat Activity",
+			"description": "How fast chat moves. Faster = more API calls (still cheap).",
+			"default": "Normal",
+			"one-of": [ "Chill", "Normal", "Hyper" ]
+		},
+		"toxicity": {
+			"type": "string",
+			"name": "Chat Vibe",
+			"description": "Wholesome = supportive. Normal = typical GD chat banter. Spicy = roasts you harder (never hateful).",
+			"default": "Normal",
+			"one-of": [ "Wholesome", "Normal", "Spicy" ]
+		},
+		"max-calls-per-minute": {
+			"type": "int",
+			"name": "Max AI Calls / Minute",
+			"description": "Hard cap on API calls, to keep costs predictable.",
+			"default": 10,
+			"min": 1,
+			"max": 30
+		},
+		"chat-width": {
+			"type": "float",
+			"name": "Chat Width",
+			"description": "Width of the chat box (fraction of the screen).",
+			"default": 0.3,
+			"min": 0.15,
+			"max": 0.5,
+			"control": { "slider-step": 0.01 }
+		},
+		"chat-opacity": {
+			"type": "int",
+			"name": "Background Opacity",
+			"default": 110,
+			"min": 0,
+			"max": 255
+		}
+	}
+}
