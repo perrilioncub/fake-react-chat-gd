@@ -32,7 +32,7 @@ struct LevelInfo {
 // Things that happen in the level and that chat reacts to.
 enum class EventKind { Start = 0, Tick = 1, Death = 2, Hype = 3, NewBest = 4, Complete = 5 };
 
-struct GameEvent {
+struct ChatEvent {
     EventKind kind;
     std::string detail;
 };
@@ -60,12 +60,12 @@ public:
     void update(float dt, ChatOverlay* overlay);
 
 private:
-    void queueEvent(GameEvent ev);
+    void queueEvent(ChatEvent ev);
     bool canCall() const;
-    void sendRequest(GameEvent ev);
+    void sendRequest(ChatEvent ev);
     void handleResponse(geode::utils::web::WebResponse resp, int sessionId);
     std::string buildSystemPrompt() const;
-    std::string buildUserPrompt(GameEvent const& ev) const;
+    std::string buildUserPrompt(ChatEvent const& ev) const;
     Chatter const* findChatter(std::string const& name) const;
     void localFiller();
 
@@ -87,7 +87,7 @@ private:
 
     // AI plumbing
     bool m_inFlight = false;
-    std::optional<GameEvent> m_pending;
+    std::optional<ChatEvent> m_pending;
     float m_lastCallAt = -1000.f;
     std::deque<float> m_callTimes;
     int m_errorCount = 0;

@@ -154,7 +154,7 @@ void Brain::onProgress(float percent, bool practice) {
     }
 }
 
-void Brain::queueEvent(GameEvent ev) {
+void Brain::queueEvent(ChatEvent ev) {
     if (!m_pending || static_cast<int>(ev.kind) >= static_cast<int>(m_pending->kind)) {
         m_pending = std::move(ev);
     }
@@ -206,7 +206,7 @@ std::string Brain::buildSystemPrompt() const {
         roster, activity().count, vibeRule());
 }
 
-std::string Brain::buildUserPrompt(GameEvent const& ev) const {
+std::string Brain::buildUserPrompt(ChatEvent const& ev) const {
     auto& L = m_level;
     std::string info = fmt::format(
         "LEVEL INFO: \"{}\" by {} (level ID {}). Difficulty: {}{}. Length: {}. Likes: {}. Downloads: {}.\n",
@@ -235,7 +235,7 @@ std::string Brain::buildUserPrompt(GameEvent const& ev) const {
     return info + session + "\n" + chat + "\nWHAT JUST HAPPENED: " + ev.detail + "\n\nWrite the next chat messages as a JSON array.";
 }
 
-void Brain::sendRequest(GameEvent ev) {
+void Brain::sendRequest(ChatEvent ev) {
     auto key = Mod::get()->getSettingValue<std::string>("api-key");
     auto model = Mod::get()->getSettingValue<std::string>("model");
     if (model.empty()) model = "claude-haiku-5-5";
